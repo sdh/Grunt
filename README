@@ -1,0 +1,27 @@
+Grunt - Plack based webapp for running scripts via a web service
+
+It is build using the Tatsumaki web application framework which supports
+non-blocking I/O through psgi.streaming and psgi.nonblocking, non-blocking HTTP clients, 
+long-poll Comet services and server push.
+
+Run the webapp with a streaming server such as AnyEvent via:
+
+ sudo plackup -s AnyEvent -a grunt.psgi
+
+= Actions =
+
+Actions are executables inside the bin directory, named <action>.grunt
+
+= Usage =
+
+A web request to:
+
+ /run/test
+
+..will execute bin/test.grunt and return all command output via multipart XHR.
+
+Pass script arguments as query params, e.g. a web request to:
+
+ /run/test?args=first&args=second
+
+..will execute "bin/test.grun first second"

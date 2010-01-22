@@ -1,0 +1,62 @@
+<html>
+ <head>
+  <title>Grunt</title>
+  <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.0.0/build/cssfonts/fonts-min.css" />
+ </head>
+ 
+ <body class="yui-skin-sam">
+  <h2>Grunt Demo</h2>
+  <p>This page uses YUI to automatically call <b>/run/test_streaming</b> which
+  corresponds to the <b>bin/test_streaming.grunt</b> bash script that echoes its
+  arguments and the sleeps a few times to realtime display of a streaming response.
+  </p>
+  <p>Run <i>"curl /run/test_streaming?args=foo&args=bar"</i> from your command line
+  to see the raw JSON-encoded multiplart XHR response</p>
+  
+  <div><ol id="stream"></ol></div>
+ 
+<script type="text/javascript" src="http://j.shirley.im/yui3/build/yui/yui.js"></script>
+<script type="text/javascript">
+(function() {
+YUI({
+    base: "http://j.shirley.im/yui3/build/",
+    combine: false,
+    patterns: {
+        'gallery-': {
+            base: "http://j.shirley.im/yui3-gallery/build/"
+        }
+    }
+}).use( "json", "node", "base", "gallery-io-stream", function(Y) {
+    var stream_uri = '/run/test_streaming?args=first&args=second&args=third';
+ 
+    var stream = new Y.IOStream({
+        uri: stream_uri,
+    });
+ 
+    var stack = [];
+ 
+    var output = Y.one('#stream');
+ 
+    Y.on('stream:packet', 
+        function(body, headers) {
+            try {
+                var data = Y.JSON.parse(body);
+                output.append( "<li>" + data.msg + "</li>"); 
+                stack.push(data);
+            } catch(e) {
+            }
+        }
+    );
+    stream.start();
+ 
+    window.setTimeout(
+        function() { 
+            stream.stop(); 
+        }, 60000);
+    });
+ 
+})();
+</script>
+ 
+</body>
+</html>

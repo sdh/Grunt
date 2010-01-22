@@ -1,0 +1,2 @@
+#!/bin/sh
+echo /data/wre/sbin/removesite.pl --sitename=$1.webguistarter.com --adminPassword=123qwe

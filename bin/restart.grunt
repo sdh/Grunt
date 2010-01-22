@@ -1,0 +1,5 @@
+#!/bin/sh
+# Gracefully restart apache - needs to be run as root for port 80
+/data/wre/prereqs/bin/apachectl -f /data/wre/etc/modperl.conf  -D WRE-modperl  -E /data/wre/var/logs/modperl.error.log  -k graceful \
+&& \
+/data/wre/prereqs/bin/apachectl -f /data/wre/etc/modproxy.conf -D WRE-modproxy -E /data/wre/var/logs/modproxy.error.log -k graceful

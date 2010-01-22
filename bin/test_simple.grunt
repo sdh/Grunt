@@ -1,0 +1,3 @@
+#!/bin/sh
+echo Test script called with arguments: $@
+echo The end;

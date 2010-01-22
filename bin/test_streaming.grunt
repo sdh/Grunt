@@ -1,0 +1,7 @@
+#!/bin/sh
+echo Test script called with arguments: $@
+echo Sleeping..
+sleep 1;
+echo And again..;
+sleep 1;
+echo The end;
