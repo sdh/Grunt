@@ -9,7 +9,6 @@ use Plack::Util;
 use Test::More;
 use HTTP::Request::Common;
 use File::Basename;
-use lib dirname(__FILE__) . '/../lib';
 
 my $app = Plack::Util::load_psgi( dirname(__FILE__) . '/../grunt.psgi' );
 
@@ -18,7 +17,7 @@ test_psgi $app, sub {
 
     my $res = $cb->(GET '/run/test_simple');
     is $res->code, 200;
-    like $res->content, qr/Test script called with arguments:\\nThe end/s, 'without arguments';
+    like $res->content, qr/Test script called with arguments:\\n/s, 'without arguments';
 };
 
 test_psgi $app, sub {
@@ -26,7 +25,7 @@ test_psgi $app, sub {
 
     my $res = $cb->(GET '/run/test_simple?args=first&args=second');
     is $res->code, 200;
-    like $res->content, qr/Test script called with arguments: first second\\nThe end/s, 'with arguments';
+    like $res->content, qr/Test script called with arguments: first second\\n/s, 'with arguments';
 };
 
 done_testing;

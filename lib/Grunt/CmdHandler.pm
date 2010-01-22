@@ -1,12 +1,13 @@
 package Grunt::CmdHandler;
-use parent qw(Tatsumaki::Handler);
-__PACKAGE__->asynchronous(1);
-
 use strict;
 use warnings;
+
+use parent qw(Tatsumaki::Handler);
 use Tatsumaki::Error;
 use AnyEvent::Run;
 use File::Basename;
+
+__PACKAGE__->asynchronous(1);
 
 # Figure out where the grunt scripts live - this will probably
 # need to change for production

@@ -1,5 +1,5 @@
 use Tatsumaki::Application;
-use lib "../lib";
+use lib 'lib';
 use Grunt::CmdHandler;
 use Grunt::MainHandler;
 use File::Basename;
