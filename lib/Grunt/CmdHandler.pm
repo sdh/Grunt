@@ -19,8 +19,8 @@ sub get {
 
     my $cmd = "$BIN/$action.grunt";
     if (-x $cmd) {
-        $self->multipart_xhr_push(1);
-        $self->stream_write( { msg => "Running $action.." } );
+        $self->multipart_xhr_push(1) if $self->request->param('mxhr');
+        $self->say( "Running $action.." );
         $self->run_cmd([$cmd, @args]);
     } else {
         $self->log("Executable not found: $cmd");
@@ -28,10 +28,21 @@ sub get {
     }
 }
 
+sub say {
+    my ($self, $msg) = @_;
+    if ($self->mxhr) {
+         $self->stream_write( { msg => $msg } );
+     } else {
+         $self->stream_write( $msg . "\n" );
+     }
+ }
+
+sub post { shift->get(@_) }
+
 # Can't set headers after mxhr started, so just send error message and close the connection
 sub error {
     my ($self, $msg) = @_;
-    $self->stream_write( { msg => $msg } );
+    $self->say( $msg );
     $self->finish;
 }
 
@@ -51,13 +62,13 @@ sub run_cmd {
                 $handle->rbuf = q{};
 
                 # $self->log($text);
-                $self->stream_write( { msg => $text } );
+                $self->say( $text );
             }
         ),
         on_error => $self->async_cb(
             sub {
                 my ( $handle, $fatal, $msg ) = @_;
-                $self->log( $msg );
+#                $self->log( $msg );
                 $self->finish;
             }
         ),

@@ -17,7 +17,11 @@ test_psgi $app, sub {
 
     my $res = $cb->(GET '/run/test_simple');
     is $res->code, 200;
-    like $res->content, qr/Test script called with arguments:\\n/s, 'without arguments';
+    is $res->content, <<END_RESPONSE, 'without arguments';
+Running test_simple..
+Test script called with arguments:
+The end
+END_RESPONSE
 };
 
 test_psgi $app, sub {
@@ -25,7 +29,11 @@ test_psgi $app, sub {
 
     my $res = $cb->(GET '/run/test_simple?args=first&args=second');
     is $res->code, 200;
-    like $res->content, qr/Test script called with arguments: first second\\n/s, 'with arguments';
+    is $res->content, <<END_RESPONSE, 'with arguments';
+Running test_simple..
+Test script called with arguments: first second
+The end
+END_RESPONSE
 };
 
 done_testing;

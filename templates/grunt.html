@@ -10,7 +10,7 @@
   corresponds to the <b>bin/test_streaming.grunt</b> bash script that echoes its
   arguments and the sleeps a few times to realtime display of a streaming response.
   </p>
-  <p>Run <i>"curl /run/test_streaming?args=foo&args=bar"</i> from your command line
+  <p>Run <i>"curl /run/test_streaming?mxhr=1&amp;args=foo&amp;args=bar"</i> from your command line
   to see the raw JSON-encoded multiplart XHR response</p>
   
   <div><ol id="stream"></ol></div>
@@ -27,7 +27,7 @@ YUI({
         }
     }
 }).use( "json", "node", "base", "gallery-io-stream", function(Y) {
-    var stream_uri = '/run/test_streaming?args=first&args=second&args=third';
+    var stream_uri = '/run/test_streaming?mxhr=1&args=first&args=second&args=third';
  
     var stream = new Y.IOStream({
         uri: stream_uri,

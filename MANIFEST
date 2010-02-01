@@ -31,5 +31,4 @@ t/pod.t
 templates/grunt.html
 xt/perlcritic.t
 xt/pod.t
-xt/podspell.t
 xt/synopsis.t
