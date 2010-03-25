@@ -1,19 +1,10 @@
 package Grunt;
 
-use warnings;
-use strict;
+# ABSTRACT: Plack based webapp for running scripts via a web service
 
-=head1 NAME
+1;
 
-Grunt - Plack based webapp for running scripts via a web service
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
+__END__
 
 =head1 DESCRIPTION
 
@@ -27,7 +18,7 @@ long-poll Comet services and server push.
 
 =head1 ACTIONS
 
-Actions are executables inside the bin directory, named <action>.grunt
+Actions are executables inside the gruntbin directory, named <action>.grunt
 
 =head1 USAGE
 
@@ -35,26 +26,12 @@ A web request to:
 
  /run/test
 
-..will execute bin/test.grunt and return all command output via multipart XHR.
+..will execute gruntbin/test.grunt and return all command output via multipart XHR.
 
 Pass script arguments as query params, e.g. a web request to:
 
  /run/test?args=first&args=second
 
-..will execute "bin/test.grun first second"
-
-=head1 AUTHOR
-
-Patrick Donelan, C<< <pat at patspam.com> >>
-
-=head1 SEE ALSO
-
-http://github.com/sdh/Grunt
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2010 Patrick Donelan.
+..will execute "gruntbin/test.grun first second"
 
 =cut
-
-1;

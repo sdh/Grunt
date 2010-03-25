@@ -1,16 +1,9 @@
 package Grunt::Remote;
+# ABSTRACT: Calls Grunt actions over HTTP
 
 use strict;
 use Params::Validate qw(:all);
 use LWP::UserAgent;
-
-=head1 NAME
-
-Grunt::Remote
-
-=head1 DESCRIPTION
-
-Calls Grunt actions over HTTP
 
 =head1 SYNOPSIS
 

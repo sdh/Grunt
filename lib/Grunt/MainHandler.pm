@@ -1,4 +1,7 @@
 package Grunt::MainHandler;
+
+# ABSTRACT: Main handler
+
 use parent qw(Tatsumaki::Handler);
 
 use strict;

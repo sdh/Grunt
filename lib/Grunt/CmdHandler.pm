@@ -1,4 +1,7 @@
 package Grunt::CmdHandler;
+
+# ABSTRACT: CMD handler
+
 use strict;
 use warnings;
 
@@ -11,7 +14,7 @@ __PACKAGE__->asynchronous(1);
 
 # Figure out where the grunt scripts live - this will probably
 # need to change for production
-my $BIN = dirname(__FILE__) . '/../../bin';
+my $BIN = dirname(__FILE__) . '/../../gruntbin';
 
 sub get {
     my ( $self, $action ) = @_;
